@@ -1,3 +1,6 @@
+
+//controller层中抽取共性的模块,放在这里,让controller子类自称该类
+
 app.controller("baseController",function ($scope) {
 
     //分页控件配置 currentPage:当前页的页数  totalItems:总记录数  itemsPerPage:每页记录数(条数) perPageOptions:分页选项

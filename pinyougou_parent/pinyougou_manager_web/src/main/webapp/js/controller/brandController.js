@@ -106,4 +106,6 @@ app.controller("brandController", function ($scope, $http,$controller,brandServi
     }
 
 
+
+
 });
