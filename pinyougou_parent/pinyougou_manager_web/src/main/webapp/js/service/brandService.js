@@ -28,4 +28,15 @@ app.service("brandService",function ($http) {
     this.search=function (page,size,searchEntity) {
         return  $http.post('../brand/search.do?page=' + page + '&size=' + size,searchEntity)
     }
+
+
+    /*
+           下拉列表数据  因为展示的是品牌的下拉列表,所以在brandService.js中发送请求,
+         在typeTemplateController.js中调取服务.
+
+     */
+    this.selectOptionList=function(){
+        return $http.get('../brand/selectOptionList.do');
+    }
+
 });

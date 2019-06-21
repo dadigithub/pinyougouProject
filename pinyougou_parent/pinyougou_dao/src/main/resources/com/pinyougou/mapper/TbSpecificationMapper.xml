@@ -97,8 +97,7 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.pinyougou.pojo.TbSpecification" >
-
-    //获取TbSpecification表中自动增长的主键id
+    <!--获取数据库中自动增长id -->
     <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
       SELECT LAST_INSERT_ID() AS id
     </selectKey>

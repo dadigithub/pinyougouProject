@@ -1,6 +1,7 @@
 package com.pinyougou.manager.controller;
 import java.util.List;
 
+import com.pinyougou.pojogroup.SpecificationGroup;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,13 +44,14 @@ public class SpecificationController {
 	
 	/**
 	 * 增加
-	 * @param specification
+	 * @param specificationGroup
 	 * @return
 	 */
-	@RequestMapping("/add")
-	public Result add(@RequestBody TbSpecification specification){
+	@RequestMapping("/add")      //接收的是我们自定义的规格组装实体类
+	public Result add(@RequestBody SpecificationGroup specificationGroup){
+
 		try {
-			specificationService.add(specification);
+			specificationService.add(specificationGroup);
 			return new Result(true, "增加成功");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,13 +61,13 @@ public class SpecificationController {
 	
 	/**
 	 * 修改
-	 * @param specification
+	 * @param SpecificationGroup
 	 * @return
 	 */
-	@RequestMapping("/update")
-	public Result update(@RequestBody TbSpecification specification){
+	@RequestMapping("/update")   //返回给客户端修改后的组合实体对象
+	public Result update(@RequestBody SpecificationGroup SpecificationGroup){
 		try {
-			specificationService.update(specification);
+			specificationService.update(SpecificationGroup);
 			return new Result(true, "修改成功");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -79,7 +81,7 @@ public class SpecificationController {
 	 * @return
 	 */
 	@RequestMapping("/findOne")
-	public TbSpecification findOne(Long id){
+	public SpecificationGroup findOne(Long id){
 		return specificationService.findOne(id);		
 	}
 	

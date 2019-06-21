@@ -10,7 +10,10 @@ import com.pinyougou.sellergoods.service.BrandService;
 import entity.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BrandServiceImpl implements BrandService {
@@ -96,8 +99,13 @@ public class BrandServiceImpl implements BrandService {
     }
 
 
-
-
+    /**
+     * 条件查询,分页展示
+     * @param brand
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     @Override
     public PageResult findPage(TbBrand brand, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
@@ -129,6 +137,27 @@ public class BrandServiceImpl implements BrandService {
         return new PageResult(page.getTotal(),page.getResult());
 
     }
+
+
+
+
+    /**
+     * 返回下拉列表数据
+     * @return
+     */
+    @Override
+    public List<Map> selectOptionList() {
+        List<TbBrand> tbBrands = brandMapper.selectByExample(null);
+        List<Map> list= new ArrayList<>();
+        for (TbBrand tbBrand : tbBrands) {
+            Map map=new HashMap();
+            map.put("id",tbBrand.getId());
+            map.put("text",tbBrand.getName());
+            list.add(map);
+        }
+        return list;
+    }
+
 
 
 

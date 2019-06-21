@@ -2,6 +2,7 @@ package com.pinyougou.sellergoods.service;
 import java.util.List;
 import com.pinyougou.pojo.TbSpecification;
 
+import com.pinyougou.pojogroup.SpecificationGroup;
 import entity.PageResult;
 /**
  * 服务层接口
@@ -27,21 +28,21 @@ public interface SpecificationService {
 	/**
 	 * 增加
 	*/
-	public void add(TbSpecification specification);
+	public void add(SpecificationGroup specificationGroup);
 	
 	
 	/**
 	 * 修改
 	 */
-	public void update(TbSpecification specification);
+	public void update(SpecificationGroup specificationGroup);
 	
 
 	/**
 	 * 根据ID获取实体
 	 * @param id
 	 * @return
-	 */
-	public TbSpecification findOne(Long id);
+	 */    //返回我们自定义的组合实体类(规格名称+规格选项)
+	public SpecificationGroup findOne(Long id);
 	
 	
 	/**
@@ -57,5 +58,10 @@ public interface SpecificationService {
 	 * @return
 	 */
 	public PageResult findPage(TbSpecification specification, int pageNum, int pageSize);
+
+
+
+
+
 	
 }

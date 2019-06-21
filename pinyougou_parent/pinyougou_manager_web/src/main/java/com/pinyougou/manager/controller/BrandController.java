@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController //他相当于 @Controller+@ResponseBody,表示服务器以json格式的字符串响应给客户端
 @RequestMapping("/brand")
@@ -128,6 +129,18 @@ public class BrandController {
     @RequestMapping("/search")
     public PageResult search(@RequestBody TbBrand brand, int page, int size) {
         return brandService.findPage(brand,page,size);
+    }
+
+
+
+
+    /**
+     * 返回下拉列表数据
+     * @return
+     */
+    @RequestMapping("/selectOptionList")
+    public List<Map> selectOptionList(){
+        return brandService.selectOptionList();
     }
 
 
