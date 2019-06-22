@@ -36,13 +36,14 @@
 						<p>二维码登录，暂为官网二维码</p>
 						<img src="../img/wx_cz.jpg" />
 					</div>
-					<div id="profile" class="tab-pane  active">
-						<form class="sui-form">
+					<div id="profile" class="tab-pane  active"><!--meth的必须为post-->
+						    <!--id为表单的id-->
+						<form id="loginform" action="/login" method="post" class="sui-form">
 							<div class="input-prepend"><span class="add-on loginname"></span>
-								<input id="prependedInput" type="text" placeholder="邮箱/用户名/手机号" class="span2 input-xfat">
+								<input id="prependedInput" name="username" type="text" placeholder="邮箱/用户名/手机号" class="span2 input-xfat">
 							</div>
 							<div class="input-prepend"><span class="add-on loginpwd"></span>
-								<input id="prependedInput" type="password" placeholder="请输入密码" class="span2 input-xfat">
+								<input id="prependedInput" name="password" type="password" placeholder="请输入密码" class="span2 input-xfat">
 							</div>
 							<div class="setting">
 								 <div id="slider">
@@ -50,8 +51,8 @@
 									<span id="label">>></span> <span id="labelTip">拖动滑块验证</span>
 									</div>
 							</div>
-							<div class="logined">
-								<a class="sui-btn btn-block btn-xlarge btn-danger" href="admin/index.html" target="_blank">登&nbsp;&nbsp;录</a>
+							<div class="logined">            														<!--根据表单的id,执行表单的提交-->
+								<a class="sui-btn btn-block btn-xlarge btn-danger" href="admin/index.html" onclick="document:loginform.submit()" target="_blank">登&nbsp;&nbsp;录</a>
 							</div>
 						</form>
 
