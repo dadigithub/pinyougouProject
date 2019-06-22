@@ -1,17 +1,17 @@
 package com.pinyougou.sellergoods.service.impl;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.pinyougou.mapper.TbSpecificationOptionMapper;
-import com.pinyougou.pojo.TbSpecificationOption;
-import com.pinyougou.pojo.TbSpecificationOptionExample;
+import com.pinyougou.pojo.*;
 import com.pinyougou.pojogroup.SpecificationGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.pinyougou.mapper.TbSpecificationMapper;
-import com.pinyougou.pojo.TbSpecification;
-import com.pinyougou.pojo.TbSpecificationExample;
 import com.pinyougou.pojo.TbSpecificationExample.Criteria;
 import com.pinyougou.sellergoods.service.SpecificationService;
 
@@ -178,6 +178,14 @@ public class SpecificationServiceImpl implements SpecificationService {
 
 
 
+	/**
+	 * 返回商品规格下拉列表参数
+	 * @return
+	 */
+	@Override
+	public List<Map> selectOptionList() {
+		return specificationMapper.selectOptionList();
+	}
 
-	
+
 }

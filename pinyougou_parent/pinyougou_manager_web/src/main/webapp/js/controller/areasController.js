@@ -76,5 +76,11 @@ app.controller('areasController' ,function($scope,$controller   ,areasService){
 			}			
 		);
 	}
+
+
+
+
+
+
     
 });	

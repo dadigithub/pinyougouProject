@@ -142,7 +142,7 @@ public class BrandServiceImpl implements BrandService {
 
 
     /**
-     * 返回下拉列表数据
+     * 返回商品下拉列表数据
      * @return
      */
     @Override
