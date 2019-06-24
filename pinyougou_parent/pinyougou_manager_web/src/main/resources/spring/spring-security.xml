@@ -28,6 +28,8 @@
 		<headers>
 			<frame-options policy="SAMEORIGIN"/>
 		</headers>
+		<!--退出设置-->
+		<logout/>
 	</http>
 
 

@@ -24,7 +24,7 @@
 	</mvc:annotation-driven>
 
 	<!-- 引用dubbo 服务 -->
-	<dubbo:application name="pinyougou-shop-web" />
+	<!--<dubbo:application name="pinyougou-shop-web" />--><!--这里和spring security的dubbo声明冲突了,只需要声明一个dubbo-->
 	<dubbo:registry address="zookeeper://192.168.25.153:2181"/>
 	<dubbo:annotation package="com.pinyougou.shop.controller" />  	
 

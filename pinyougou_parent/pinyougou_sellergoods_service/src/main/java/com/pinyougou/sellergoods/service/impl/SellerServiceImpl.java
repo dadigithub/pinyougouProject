@@ -1,4 +1,5 @@
 package com.pinyougou.sellergoods.service.impl;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
@@ -46,6 +47,9 @@ public class SellerServiceImpl implements SellerService {
 	 */
 	@Override
 	public void add(TbSeller seller) {
+		seller.setStatus("0"); //状态
+		seller.setCreateTime(new Date()); //申请日期
+
 		sellerMapper.insert(seller);		
 	}
 
@@ -159,5 +163,28 @@ public class SellerServiceImpl implements SellerService {
 		Page<TbSeller> page= (Page<TbSeller>)sellerMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
 	}
-	
+
+
+	/**
+	 * 更改商家审核状态 0：未审核 1：已审核 2：审核未通过 3：关闭
+	 *
+	 * @param sellerId
+	 * @param status
+	 */
+	@Override
+	public void updateStatus(String sellerId, String status) {
+
+		//根据主键id,sellerId,查询出商家注册信息对象
+		TbSeller seller = sellerMapper.selectByPrimaryKey(sellerId);
+		//将前台传过来的商家审核状态注入到seller对象当中
+		seller.setStatus(status);
+		//这里执行的就是sql语句,传入TbSeller表的对象seller,根据主键id,sellerId,进行更改status
+		//传入seller对象是因为,对象中刚刚存入了主键id和要更改的状态
+		sellerMapper.updateByPrimaryKey(seller);
+
+
+	}
+
+
+
 }
