@@ -41,21 +41,9 @@ public class GoodsController {
 		return goodsService.findPage(page, rows);
 	}
 	
-	/**
-	 * 增加
-	 * @param goods
-	 * @return
-	 */
-	@RequestMapping("/add")
-	public Result add(@RequestBody TbGoods goods){
-		try {
-			goodsService.add(goods);
-			return new Result(true, "增加成功");
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new Result(false, "增加失败");
-		}
-	}
+
+	//增加,运营商后台没有商品的添加,商品的添加功能在shop-web中
+
 	
 	/**
 	 * 修改
