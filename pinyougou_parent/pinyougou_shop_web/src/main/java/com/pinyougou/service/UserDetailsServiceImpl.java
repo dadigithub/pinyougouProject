@@ -37,7 +37,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         //得到商家对象
         TbSeller seller = sellerService.findOne(username);
         if (seller != null) {
+            //判断商家入驻申请的状态是否已经通过审核
             if (seller.getStatus().equals("1")) {
+                //user是spring security为我们提供的一个实现类
                 return new User(username, seller.getPassword(), grantedAuths);
             } else {
                 return null;

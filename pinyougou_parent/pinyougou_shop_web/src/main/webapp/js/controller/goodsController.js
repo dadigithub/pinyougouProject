@@ -1,5 +1,5 @@
  //控制层 
-app.controller('goodsController' ,function($scope,$controller   ,goodsService,uploadService,itemCatService,typeTemplateService){
+app.controller('goodsController' ,function($scope,$controller,$location,goodsService,uploadService,itemCatService,typeTemplateService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -23,18 +23,48 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService,up
 	}
 	
 	//查询实体 
-	$scope.findOne=function(id){				
+	$scope.findOne=function(id){
+
+		//search方法表示获取地址栏上所有的参数,他是一个数组的形式
+	    var id = $location.search()['id']; //获取参数值
+
+        if (id == null) {
+        	return;
+        }
+
 		goodsService.findOne(id).success(
 			function(response){
-				$scope.entity= response;					
+				$scope.entity= response;
+
+				//向富文本编辑器添加商品介绍
+				editor.html($scope.entity.goodsDesc.introduction);
+
+				//显示图片列表
+				$scope.entity.goodsDesc.itemImages=JSON.parse($scope.entity.goodsDesc.itemImages);
+
+				//显示商品扩展属性
+                $scope.entity.goodsDesc.customAttributeItems=JSON.parse($scope.entity.goodsDesc.customAttributeItems);
+
+                //规格
+                $scope.entity.goodsDesc.specificationItems=JSON.parse($scope.entity.goodsDesc.specificationItems);
+
+
+
+
+
 			}
 		);				
 	}
-	
+
+
+
 	//保存 
-	$scope.save=function(){				
+	$scope.save=function(){
+		//提取文本编辑器的值
+        $scope.entity.goodsDesc.introduction=editor.html();
+
 		var serviceObject;//服务层对象  				
-		if($scope.entity.id!=null){//如果有ID
+		if($scope.entity.goods.id!=null){//如果有ID
 			serviceObject=goodsService.update( $scope.entity ); //修改  
 		}else{
 			serviceObject=goodsService.add( $scope.entity  );//增加 
@@ -44,7 +74,8 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService,up
 				if(response.success){
                     alert("新增成功");
                     //重新查询
-		        	$scope.reloadList();//重新加载
+		        	// $scope.reloadList();//重新加载
+                    location.href='goods.html';
 				}else{
 					alert(response.message);
 				}
@@ -194,10 +225,79 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService,up
 				$scope.typeTemplate=response;//获取类型模板
 				$scope.typeTemplate.brandIds=JSON.parse($scope.typeTemplate.brandIds);//品牌列表
 
-				$scope.entity.goodsDesc.customAttributeItems=JSON.parse($scope.typeTemplate.customAttributeItems)//扩展属性
+				//如果没有ID,则加载模板中的扩展数据
+				if ($location.search()['id']==null) {
+                    $scope.entity.goodsDesc.customAttributeItems = JSON.parse($scope.typeTemplate.customAttributeItems)//扩展属性
+
+				}
+
+                //查询规格列表
+                typeTemplateService.findSpecList(newValue).success(
+                    function(response){
+                        $scope.specList=response;
+                    }
+                );
+
+
 			}
 		);
     });
+
+
+
+	//我们需要将用户选中的选项保存在 tb_goods_desc 表的 specification_items 字段中
+    $scope.entity={ goodsDesc:{itemImages:[],specificationItems:[]} };
+
+    $scope.updateSpecAttribute=function($event,name,value){
+        var object= $scope.searchObjectByKey(
+            $scope.entity.goodsDesc.specificationItems ,'attributeName', name);
+        if(object!=null){
+            if($event.target.checked ){
+                object.attributeValue.push(value);
+            }else{//取消勾选
+                object.attributeValue.splice( object.attributeValue.indexOf(value ) ,1);//移除选项
+                //如果选项都取消了，将此条记录移除
+			if(object.attributeValue.length==0){
+				$scope.entity.goodsDesc.specificationItems.splice(
+					$scope.entity.goodsDesc.specificationItems.indexOf(object),1);
+			}
+		}
+			}else{
+				$scope.entity.goodsDesc.specificationItems.push(
+					{"attributeName":name,"attributeValue":[value]});
+			}
+    }
+
+
+
+
+
+
+	//商品状态
+	$scope.status=['未审核','已审核','审核未通过','关闭'];
+
+
+	//商品分类列表
+	$scope.itemCatList=[];
+
+	//加载商品分类列表
+	$scope.findItemCatList=function () {
+		itemCatService.findAll().success(
+			function (response) {
+                for (var i = 0; i<response.length ; i++) {
+					$scope.itemCatList[response[i].id]=response[i].name;
+                }
+            }
+		);
+    }
+
+
+
+
+
+
+
+
 
 
 

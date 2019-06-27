@@ -32,7 +32,8 @@ app.service('sellerService',function($http){
 
 	//更改状态
 	this.updateStatus=function (sellerId, status) {
-		return $http.get('../seller/updateStatus.do?sellerId='+sellerId+'&status'+status);
+		alert(status);													//以后记得拼接的时候=号不能丢了
+		return $http.get('../seller/updateStatus.do?sellerId='+sellerId+'&status='+status);
     }
 
 

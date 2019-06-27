@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 组合实体类goods
  */
-public class Goods implements Serializable {
+public class GoodsGroup implements Serializable {
     /*
           TbGoods -> TbGoodsDesc 一对一
           TbGoodsDesc -> TbItem 一对多

@@ -12,6 +12,7 @@ import com.pinyougou.pojo.TbSellerExample.Criteria;
 import com.pinyougou.sellergoods.service.SellerService;
 
 import entity.PageResult;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 服务实现层
@@ -19,6 +20,7 @@ import entity.PageResult;
  *
  */
 @Service
+@Transactional
 public class SellerServiceImpl implements SellerService {
 
 	@Autowired
@@ -47,7 +49,7 @@ public class SellerServiceImpl implements SellerService {
 	 */
 	@Override
 	public void add(TbSeller seller) {
-		seller.setStatus("0"); //状态
+		seller.setStatus("0"); //在这里把申请上级的状态设置为0状态!!!
 		seller.setCreateTime(new Date()); //申请日期
 
 		sellerMapper.insert(seller);		

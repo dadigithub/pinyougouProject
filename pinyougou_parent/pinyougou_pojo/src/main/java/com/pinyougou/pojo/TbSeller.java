@@ -19,7 +19,7 @@ public class TbSeller implements Serializable {
 
     private String telephone; //公司电话
 
-    private String status; //状态
+    private String status; //状态,在service层中进行设置,设置为0!!!
 
     private String addressDetail; //地址
 

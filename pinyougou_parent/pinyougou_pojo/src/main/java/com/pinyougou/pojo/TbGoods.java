@@ -12,7 +12,7 @@ public class TbGoods implements Serializable {
 
     private Long defaultItemId;
 
-    private String auditStatus;
+    private String auditStatus; //商品的审核状态
 
     private String isMarketable;
 

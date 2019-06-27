@@ -5,13 +5,13 @@ import java.io.Serializable;
 public class TbGoodsDesc implements Serializable {
     private Long goodsId;
 
-    private String introduction;
+    private String introduction; //富文本编辑器
 
-    private String specificationItems;
+    private String specificationItems; //规格
 
-    private String customAttributeItems;
+    private String customAttributeItems; //扩展属性
 
-    private String itemImages;
+    private String itemImages; //商品图片
 
     private String packageList;
 

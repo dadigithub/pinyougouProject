@@ -2,7 +2,7 @@ package com.pinyougou.shop.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.pinyougou.pojo.TbGoods;
-import com.pinyougou.pojogroup.Goods;
+import com.pinyougou.pojogroup.GoodsGroup;
 import com.pinyougou.sellergoods.service.GoodsService;
 import entity.PageResult;
 import entity.Result;
@@ -50,7 +50,7 @@ public class GoodsController {
 	 * @return
 	 */
 	@RequestMapping("/add")
-	public Result add(@RequestBody Goods goods){
+	public Result add(@RequestBody GoodsGroup goods){
 		//获取商家ID
 		String sellerId = SecurityContextHolder.getContext().getAuthentication().getName();
 		//设置商家ID
@@ -71,7 +71,20 @@ public class GoodsController {
 	 * @return
 	 */
 	@RequestMapping("/update")
-	public Result update(@RequestBody TbGoods goods){
+	public Result update(@RequestBody GoodsGroup goods){
+		//获取客户端传递过来的商家id
+		GoodsGroup goods2 = goodsService.findOne(goods.getGoods().getId());
+
+		//获取当前登录的商家 ID
+		String sellerId = SecurityContextHolder.getContext().getAuthentication().getName();
+
+		//如果传递过来的商家 ID 并不是当前登录的用户的 ID,则属于非法操作,进行id的校验
+		if(!goods2.getGoods().getSellerId().equals(sellerId)
+				|| !goods.getGoods().getSellerId().equals(sellerId)){
+			return new Result(false, "操作非法");
+		}
+
+
 		try {
 			goodsService.update(goods);
 			return new Result(true, "修改成功");
@@ -82,13 +95,14 @@ public class GoodsController {
 	}	
 	
 	/**
-	 * 获取实体
+	 * 根据ID获取自定义实体类
 	 * @param id
 	 * @return
 	 */
 	@RequestMapping("/findOne")
-	public TbGoods findOne(Long id){
-		return goodsService.findOne(id);		
+	public GoodsGroup findOne(Long id){
+
+		return goodsService.findOne(id);
 	}
 	
 	/**
@@ -106,7 +120,9 @@ public class GoodsController {
 			return new Result(false, "删除失败");
 		}
 	}
-	
+
+
+
 		/**
 	 * 查询+分页
 	 * @param
@@ -116,7 +132,19 @@ public class GoodsController {
 	 */
 	@RequestMapping("/search")
 	public PageResult search(@RequestBody TbGoods goods, int page, int rows  ){
-		return goodsService.findPage(goods, page, rows);		
+		//获取商家ID
+		String sellerId = SecurityContextHolder.getContext().getAuthentication().getName();
+
+		//添加查询条件
+		goods.setSellerId(sellerId);
+
+		return goodsService.findPage(goods, page, rows);
 	}
+
+
+
+
+
+
 	
 }
