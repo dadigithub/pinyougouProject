@@ -2,12 +2,12 @@ package com.pinyougou.manager.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.pinyougou.pojo.TbSpecification;
 import com.pinyougou.pojogroup.SpecificationGroup;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.pinyougou.pojo.TbSpecification;
 import com.pinyougou.sellergoods.service.SpecificationService;
 
 import entity.PageResult;
@@ -29,7 +29,7 @@ public class SpecificationController {
 	 * @return
 	 */
 	@RequestMapping("/findAll")
-	public List<TbSpecification> findAll(){			
+	public List<TbSpecification> findAll(){
 		return specificationService.findAll();
 	}
 	

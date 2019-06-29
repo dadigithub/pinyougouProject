@@ -1,11 +1,11 @@
 package com.pinyougou.manager.controller;
 import java.util.List;
 
+import com.pinyougou.pojo.TbTypeTemplate;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.pinyougou.pojo.TbTypeTemplate;
 import com.pinyougou.sellergoods.service.TypeTemplateService;
 
 import entity.PageResult;
@@ -27,7 +27,7 @@ public class TypeTemplateController {
 	 * @return
 	 */
 	@RequestMapping("/findAll")
-	public List<TbTypeTemplate> findAll(){			
+	public List<TbTypeTemplate> findAll(){
 		return typeTemplateService.findAll();
 	}
 	

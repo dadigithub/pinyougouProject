@@ -1,11 +1,11 @@
 package com.pinyougou.manager.controller;
 import java.util.List;
 
+import com.pinyougou.pojo.TbGoodsDesc;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.pinyougou.pojo.TbGoodsDesc;
 import com.pinyougou.sellergoods.service.GoodsDescService;
 
 import entity.PageResult;
@@ -27,7 +27,7 @@ public class GoodsDescController {
 	 * @return
 	 */
 	@RequestMapping("/findAll")
-	public List<TbGoodsDesc> findAll(){			
+	public List<TbGoodsDesc> findAll(){
 		return goodsDescService.findAll();
 	}
 	
@@ -101,7 +101,7 @@ public class GoodsDescController {
 	
 		/**
 	 * 查询+分页
-	 * @param brand
+	 * @param
 	 * @param page
 	 * @param rows
 	 * @return

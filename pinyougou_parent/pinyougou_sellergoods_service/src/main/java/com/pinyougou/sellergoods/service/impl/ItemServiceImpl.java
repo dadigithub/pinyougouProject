@@ -1,13 +1,13 @@
 package com.pinyougou.sellergoods.service.impl;
 import java.util.List;
+
+import com.pinyougou.pojo.TbItem;
+import com.pinyougou.pojo.TbItemExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.pinyougou.mapper.TbItemMapper;
-import com.pinyougou.pojo.TbItem;
-import com.pinyougou.pojo.TbItemExample;
-import com.pinyougou.pojo.TbItemExample.Criteria;
 import com.pinyougou.sellergoods.service.ItemService;
 
 import entity.PageResult;
@@ -86,7 +86,7 @@ public class ItemServiceImpl implements ItemService {
 		PageHelper.startPage(pageNum, pageSize);
 		
 		TbItemExample example=new TbItemExample();
-		Criteria criteria = example.createCriteria();
+		TbItemExample.Criteria criteria = example.createCriteria();
 		
 		if(item!=null){			
 						if(item.getTitle()!=null && item.getTitle().length()>0){

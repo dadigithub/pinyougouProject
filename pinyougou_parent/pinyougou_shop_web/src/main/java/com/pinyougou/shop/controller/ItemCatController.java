@@ -28,7 +28,7 @@ public class ItemCatController {
 	 * @return
 	 */
 	@RequestMapping("/findAll")
-	public List<TbItemCat> findAll(){			
+	public List<TbItemCat> findAll(){
 		return itemCatService.findAll();
 	}
 	

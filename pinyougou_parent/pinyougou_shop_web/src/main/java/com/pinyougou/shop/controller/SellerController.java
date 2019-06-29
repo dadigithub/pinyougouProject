@@ -29,7 +29,7 @@ public class SellerController {
 	 * @return
 	 */
 	@RequestMapping("/findAll")
-	public List<TbSeller> findAll(){			
+	public List<TbSeller> findAll(){
 		return sellerService.findAll();
 	}
 	

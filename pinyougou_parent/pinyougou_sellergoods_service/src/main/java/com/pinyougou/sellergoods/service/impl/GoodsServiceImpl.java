@@ -2,16 +2,15 @@ package com.pinyougou.sellergoods.service.impl;
 import java.util.List;
 
 import com.pinyougou.mapper.TbGoodsDescMapper;
+import com.pinyougou.pojo.TbGoods;
 import com.pinyougou.pojo.TbGoodsDesc;
+import com.pinyougou.pojo.TbGoodsExample;
 import com.pinyougou.pojogroup.GoodsGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.pinyougou.mapper.TbGoodsMapper;
-import com.pinyougou.pojo.TbGoods;
-import com.pinyougou.pojo.TbGoodsExample;
-import com.pinyougou.pojo.TbGoodsExample.Criteria;
 import com.pinyougou.sellergoods.service.GoodsService;
 
 import entity.PageResult;
@@ -130,7 +129,7 @@ public class GoodsServiceImpl implements GoodsService {
 		PageHelper.startPage(pageNum, pageSize);
 		
 		TbGoodsExample example=new TbGoodsExample();
-		Criteria criteria = example.createCriteria();
+		TbGoodsExample.Criteria criteria = example.createCriteria();
 		criteria.andIsDeleteIsNull();//指定条件为未逻辑删除记录,就是只查询isDelete字段的商品,如果该字段不为空则不查询.
 		
 		if(goods!=null){			
